@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nngdjt.test.mapper.SysTradeRecordsMapper" >
+  <resultMap id="BaseResultMap" type="com.nngdjt.test.entity.SysTradeRecords" >
+    <id column="REC_ID" property="recId" jdbcType="VARCHAR" />
+    <result column="SYS_CDE" property="sysCde" jdbcType="VARCHAR" />
+    <result column="TOT_CNT" property="totCnt" jdbcType="VARCHAR" />
+    <result column="UN_ACCT_CNT" property="unAcctCnt" jdbcType="VARCHAR" />
+    <result column="ACCT_CNT" property="acctCnt" jdbcType="VARCHAR" />
+    <result column="TRADE_AMT" property="tradeAmt" jdbcType="VARCHAR" />
+    <result column="SUCC_AMT" property="succAmt" jdbcType="VARCHAR" />
+    <result column="ELE_CHN_CNT" property="eleChnCnt" jdbcType="VARCHAR" />
+    <result column="CRT_DTE" property="crtDte" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    REC_ID, SYS_CDE, TOT_CNT, UN_ACCT_CNT, ACCT_CNT, TRADE_AMT, SUCC_AMT, ELE_CHN_CNT, 
+    CRT_DTE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nngdjt.test.entity.SysTradeRecordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_trade_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_trade_records
+    where REC_ID = #{recId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from sys_trade_records
+    where REC_ID = #{recId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nngdjt.test.entity.SysTradeRecordsExample" >
+    delete from sys_trade_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nngdjt.test.entity.SysTradeRecords" >
+    insert into sys_trade_records (REC_ID, SYS_CDE, TOT_CNT, 
+      UN_ACCT_CNT, ACCT_CNT, TRADE_AMT, 
+      SUCC_AMT, ELE_CHN_CNT, CRT_DTE
+      )
+    values (#{recId,jdbcType=VARCHAR}, #{sysCde,jdbcType=VARCHAR}, #{totCnt,jdbcType=VARCHAR}, 
+      #{unAcctCnt,jdbcType=VARCHAR}, #{acctCnt,jdbcType=VARCHAR}, #{tradeAmt,jdbcType=VARCHAR}, 
+      #{succAmt,jdbcType=VARCHAR}, #{eleChnCnt,jdbcType=VARCHAR}, #{crtDte,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.nngdjt.test.entity.SysTradeRecords" >
+    insert into sys_trade_records
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="recId != null" >
+        REC_ID,
+      </if>
+      <if test="sysCde != null" >
+        SYS_CDE,
+      </if>
+      <if test="totCnt != null" >
+        TOT_CNT,
+      </if>
+      <if test="unAcctCnt != null" >
+        UN_ACCT_CNT,
+      </if>
+      <if test="acctCnt != null" >
+        ACCT_CNT,
+      </if>
+      <if test="tradeAmt != null" >
+        TRADE_AMT,
+      </if>
+      <if test="succAmt != null" >
+        SUCC_AMT,
+      </if>
+      <if test="eleChnCnt != null" >
+        ELE_CHN_CNT,
+      </if>
+      <if test="crtDte != null" >
+        CRT_DTE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="recId != null" >
+        #{recId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysCde != null" >
+        #{sysCde,jdbcType=VARCHAR},
+      </if>
+      <if test="totCnt != null" >
+        #{totCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="unAcctCnt != null" >
+        #{unAcctCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="acctCnt != null" >
+        #{acctCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeAmt != null" >
+        #{tradeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="succAmt != null" >
+        #{succAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="eleChnCnt != null" >
+        #{eleChnCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDte != null" >
+        #{crtDte,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nngdjt.test.entity.SysTradeRecordsExample" resultType="java.lang.Integer" >
+    select count(*) from sys_trade_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sys_trade_records
+    <set >
+      <if test="record.recId != null" >
+        REC_ID = #{record.recId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysCde != null" >
+        SYS_CDE = #{record.sysCde,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totCnt != null" >
+        TOT_CNT = #{record.totCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unAcctCnt != null" >
+        UN_ACCT_CNT = #{record.unAcctCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctCnt != null" >
+        ACCT_CNT = #{record.acctCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeAmt != null" >
+        TRADE_AMT = #{record.tradeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.succAmt != null" >
+        SUCC_AMT = #{record.succAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eleChnCnt != null" >
+        ELE_CHN_CNT = #{record.eleChnCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.crtDte != null" >
+        CRT_DTE = #{record.crtDte,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sys_trade_records
+    set REC_ID = #{record.recId,jdbcType=VARCHAR},
+      SYS_CDE = #{record.sysCde,jdbcType=VARCHAR},
+      TOT_CNT = #{record.totCnt,jdbcType=VARCHAR},
+      UN_ACCT_CNT = #{record.unAcctCnt,jdbcType=VARCHAR},
+      ACCT_CNT = #{record.acctCnt,jdbcType=VARCHAR},
+      TRADE_AMT = #{record.tradeAmt,jdbcType=VARCHAR},
+      SUCC_AMT = #{record.succAmt,jdbcType=VARCHAR},
+      ELE_CHN_CNT = #{record.eleChnCnt,jdbcType=VARCHAR},
+      CRT_DTE = #{record.crtDte,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nngdjt.test.entity.SysTradeRecords" >
+    update sys_trade_records
+    <set >
+      <if test="sysCde != null" >
+        SYS_CDE = #{sysCde,jdbcType=VARCHAR},
+      </if>
+      <if test="totCnt != null" >
+        TOT_CNT = #{totCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="unAcctCnt != null" >
+        UN_ACCT_CNT = #{unAcctCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="acctCnt != null" >
+        ACCT_CNT = #{acctCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeAmt != null" >
+        TRADE_AMT = #{tradeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="succAmt != null" >
+        SUCC_AMT = #{succAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="eleChnCnt != null" >
+        ELE_CHN_CNT = #{eleChnCnt,jdbcType=VARCHAR},
+      </if>
+      <if test="crtDte != null" >
+        CRT_DTE = #{crtDte,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where REC_ID = #{recId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nngdjt.test.entity.SysTradeRecords" >
+    update sys_trade_records
+    set SYS_CDE = #{sysCde,jdbcType=VARCHAR},
+      TOT_CNT = #{totCnt,jdbcType=VARCHAR},
+      UN_ACCT_CNT = #{unAcctCnt,jdbcType=VARCHAR},
+      ACCT_CNT = #{acctCnt,jdbcType=VARCHAR},
+      TRADE_AMT = #{tradeAmt,jdbcType=VARCHAR},
+      SUCC_AMT = #{succAmt,jdbcType=VARCHAR},
+      ELE_CHN_CNT = #{eleChnCnt,jdbcType=VARCHAR},
+      CRT_DTE = #{crtDte,jdbcType=VARCHAR}
+    where REC_ID = #{recId,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.nngdjt.test.entity.SysTradeRecordsExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sys_trade_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>

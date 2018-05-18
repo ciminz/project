@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.nngdjt.test.mapper.EsbTraceRecordsMapper" >
+  <resultMap id="BaseResultMap" type="com.nngdjt.test.entity.EsbTraceRecords" >
+    <id column="MSG_ID" property="msgId" jdbcType="VARCHAR" />
+    <result column="TRADE_SRC" property="tradeSrc" jdbcType="VARCHAR" />
+    <result column="TRADE_TARGET" property="tradeTarget" jdbcType="VARCHAR" />
+    <result column="CHN" property="chn" jdbcType="VARCHAR" />
+    <result column="SERVICE" property="service" jdbcType="VARCHAR" />
+    <result column="OPERATE" property="operate" jdbcType="VARCHAR" />
+    <result column="TRADE_TYPE" property="tradeType" jdbcType="VARCHAR" />
+    <result column="JRN_NO" property="jrnNo" jdbcType="VARCHAR" />
+    <result column="REQ_STATUS" property="reqStatus" jdbcType="VARCHAR" />
+    <result column="REQ_STATUS_RMK" property="reqStatusRmk" jdbcType="VARCHAR" />
+    <result column="RES_CDE" property="resCde" jdbcType="VARCHAR" />
+    <result column="RES_STATUS" property="resStatus" jdbcType="VARCHAR" />
+    <result column="RES_STATUS_RMK" property="resStatusRmk" jdbcType="VARCHAR" />
+    <result column="TRADE_AMT" property="tradeAmt" jdbcType="VARCHAR" />
+    <result column="REQ_TIME" property="reqTime" jdbcType="VARCHAR" />
+    <result column="RES_TIME" property="resTime" jdbcType="VARCHAR" />
+    <result column="PROCESS_TIME" property="processTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MSG_ID, TRADE_SRC, TRADE_TARGET, CHN, SERVICE, OPERATE, TRADE_TYPE, JRN_NO, REQ_STATUS, 
+    REQ_STATUS_RMK, RES_CDE, RES_STATUS, RES_STATUS_RMK, TRADE_AMT, REQ_TIME, RES_TIME, 
+    PROCESS_TIME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.nngdjt.test.entity.EsbTraceRecordsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from esb_trace_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from esb_trace_records
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from esb_trace_records
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.nngdjt.test.entity.EsbTraceRecordsExample" >
+    delete from esb_trace_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.nngdjt.test.entity.EsbTraceRecords" >
+    insert into esb_trace_records (MSG_ID, TRADE_SRC, TRADE_TARGET, 
+      CHN, SERVICE, OPERATE, 
+      TRADE_TYPE, JRN_NO, REQ_STATUS, 
+      REQ_STATUS_RMK, RES_CDE, RES_STATUS, 
+      RES_STATUS_RMK, TRADE_AMT, REQ_TIME, 
+      RES_TIME, PROCESS_TIME)
+    values (#{msgId,jdbcType=VARCHAR}, #{tradeSrc,jdbcType=VARCHAR}, #{tradeTarget,jdbcType=VARCHAR}, 
+      #{chn,jdbcType=VARCHAR}, #{service,jdbcType=VARCHAR}, #{operate,jdbcType=VARCHAR}, 
+      #{tradeType,jdbcType=VARCHAR}, #{jrnNo,jdbcType=VARCHAR}, #{reqStatus,jdbcType=VARCHAR}, 
+      #{reqStatusRmk,jdbcType=VARCHAR}, #{resCde,jdbcType=VARCHAR}, #{resStatus,jdbcType=VARCHAR}, 
+      #{resStatusRmk,jdbcType=VARCHAR}, #{tradeAmt,jdbcType=VARCHAR}, #{reqTime,jdbcType=VARCHAR}, 
+      #{resTime,jdbcType=VARCHAR}, #{processTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.nngdjt.test.entity.EsbTraceRecords" >
+    insert into esb_trace_records
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        MSG_ID,
+      </if>
+      <if test="tradeSrc != null" >
+        TRADE_SRC,
+      </if>
+      <if test="tradeTarget != null" >
+        TRADE_TARGET,
+      </if>
+      <if test="chn != null" >
+        CHN,
+      </if>
+      <if test="service != null" >
+        SERVICE,
+      </if>
+      <if test="operate != null" >
+        OPERATE,
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE,
+      </if>
+      <if test="jrnNo != null" >
+        JRN_NO,
+      </if>
+      <if test="reqStatus != null" >
+        REQ_STATUS,
+      </if>
+      <if test="reqStatusRmk != null" >
+        REQ_STATUS_RMK,
+      </if>
+      <if test="resCde != null" >
+        RES_CDE,
+      </if>
+      <if test="resStatus != null" >
+        RES_STATUS,
+      </if>
+      <if test="resStatusRmk != null" >
+        RES_STATUS_RMK,
+      </if>
+      <if test="tradeAmt != null" >
+        TRADE_AMT,
+      </if>
+      <if test="reqTime != null" >
+        REQ_TIME,
+      </if>
+      <if test="resTime != null" >
+        RES_TIME,
+      </if>
+      <if test="processTime != null" >
+        PROCESS_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="msgId != null" >
+        #{msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeSrc != null" >
+        #{tradeSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTarget != null" >
+        #{tradeTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="chn != null" >
+        #{chn,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null" >
+        #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="operate != null" >
+        #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="jrnNo != null" >
+        #{jrnNo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqStatus != null" >
+        #{reqStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reqStatusRmk != null" >
+        #{reqStatusRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="resCde != null" >
+        #{resCde,jdbcType=VARCHAR},
+      </if>
+      <if test="resStatus != null" >
+        #{resStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="resStatusRmk != null" >
+        #{resStatusRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeAmt != null" >
+        #{tradeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="reqTime != null" >
+        #{reqTime,jdbcType=VARCHAR},
+      </if>
+      <if test="resTime != null" >
+        #{resTime,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null" >
+        #{processTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.nngdjt.test.entity.EsbTraceRecordsExample" resultType="java.lang.Integer" >
+    select count(*) from esb_trace_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update esb_trace_records
+    <set >
+      <if test="record.msgId != null" >
+        MSG_ID = #{record.msgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeSrc != null" >
+        TRADE_SRC = #{record.tradeSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeTarget != null" >
+        TRADE_TARGET = #{record.tradeTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chn != null" >
+        CHN = #{record.chn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.service != null" >
+        SERVICE = #{record.service,jdbcType=VARCHAR},
+      </if>
+      <if test="record.operate != null" >
+        OPERATE = #{record.operate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeType != null" >
+        TRADE_TYPE = #{record.tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jrnNo != null" >
+        JRN_NO = #{record.jrnNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqStatus != null" >
+        REQ_STATUS = #{record.reqStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqStatusRmk != null" >
+        REQ_STATUS_RMK = #{record.reqStatusRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resCde != null" >
+        RES_CDE = #{record.resCde,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resStatus != null" >
+        RES_STATUS = #{record.resStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resStatusRmk != null" >
+        RES_STATUS_RMK = #{record.resStatusRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tradeAmt != null" >
+        TRADE_AMT = #{record.tradeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reqTime != null" >
+        REQ_TIME = #{record.reqTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resTime != null" >
+        RES_TIME = #{record.resTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.processTime != null" >
+        PROCESS_TIME = #{record.processTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update esb_trace_records
+    set MSG_ID = #{record.msgId,jdbcType=VARCHAR},
+      TRADE_SRC = #{record.tradeSrc,jdbcType=VARCHAR},
+      TRADE_TARGET = #{record.tradeTarget,jdbcType=VARCHAR},
+      CHN = #{record.chn,jdbcType=VARCHAR},
+      SERVICE = #{record.service,jdbcType=VARCHAR},
+      OPERATE = #{record.operate,jdbcType=VARCHAR},
+      TRADE_TYPE = #{record.tradeType,jdbcType=VARCHAR},
+      JRN_NO = #{record.jrnNo,jdbcType=VARCHAR},
+      REQ_STATUS = #{record.reqStatus,jdbcType=VARCHAR},
+      REQ_STATUS_RMK = #{record.reqStatusRmk,jdbcType=VARCHAR},
+      RES_CDE = #{record.resCde,jdbcType=VARCHAR},
+      RES_STATUS = #{record.resStatus,jdbcType=VARCHAR},
+      RES_STATUS_RMK = #{record.resStatusRmk,jdbcType=VARCHAR},
+      TRADE_AMT = #{record.tradeAmt,jdbcType=VARCHAR},
+      REQ_TIME = #{record.reqTime,jdbcType=VARCHAR},
+      RES_TIME = #{record.resTime,jdbcType=VARCHAR},
+      PROCESS_TIME = #{record.processTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.nngdjt.test.entity.EsbTraceRecords" >
+    update esb_trace_records
+    <set >
+      <if test="tradeSrc != null" >
+        TRADE_SRC = #{tradeSrc,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeTarget != null" >
+        TRADE_TARGET = #{tradeTarget,jdbcType=VARCHAR},
+      </if>
+      <if test="chn != null" >
+        CHN = #{chn,jdbcType=VARCHAR},
+      </if>
+      <if test="service != null" >
+        SERVICE = #{service,jdbcType=VARCHAR},
+      </if>
+      <if test="operate != null" >
+        OPERATE = #{operate,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null" >
+        TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
+      </if>
+      <if test="jrnNo != null" >
+        JRN_NO = #{jrnNo,jdbcType=VARCHAR},
+      </if>
+      <if test="reqStatus != null" >
+        REQ_STATUS = #{reqStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="reqStatusRmk != null" >
+        REQ_STATUS_RMK = #{reqStatusRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="resCde != null" >
+        RES_CDE = #{resCde,jdbcType=VARCHAR},
+      </if>
+      <if test="resStatus != null" >
+        RES_STATUS = #{resStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="resStatusRmk != null" >
+        RES_STATUS_RMK = #{resStatusRmk,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeAmt != null" >
+        TRADE_AMT = #{tradeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="reqTime != null" >
+        REQ_TIME = #{reqTime,jdbcType=VARCHAR},
+      </if>
+      <if test="resTime != null" >
+        RES_TIME = #{resTime,jdbcType=VARCHAR},
+      </if>
+      <if test="processTime != null" >
+        PROCESS_TIME = #{processTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.nngdjt.test.entity.EsbTraceRecords" >
+    update esb_trace_records
+    set TRADE_SRC = #{tradeSrc,jdbcType=VARCHAR},
+      TRADE_TARGET = #{tradeTarget,jdbcType=VARCHAR},
+      CHN = #{chn,jdbcType=VARCHAR},
+      SERVICE = #{service,jdbcType=VARCHAR},
+      OPERATE = #{operate,jdbcType=VARCHAR},
+      TRADE_TYPE = #{tradeType,jdbcType=VARCHAR},
+      JRN_NO = #{jrnNo,jdbcType=VARCHAR},
+      REQ_STATUS = #{reqStatus,jdbcType=VARCHAR},
+      REQ_STATUS_RMK = #{reqStatusRmk,jdbcType=VARCHAR},
+      RES_CDE = #{resCde,jdbcType=VARCHAR},
+      RES_STATUS = #{resStatus,jdbcType=VARCHAR},
+      RES_STATUS_RMK = #{resStatusRmk,jdbcType=VARCHAR},
+      TRADE_AMT = #{tradeAmt,jdbcType=VARCHAR},
+      REQ_TIME = #{reqTime,jdbcType=VARCHAR},
+      RES_TIME = #{resTime,jdbcType=VARCHAR},
+      PROCESS_TIME = #{processTime,jdbcType=VARCHAR}
+    where MSG_ID = #{msgId,jdbcType=VARCHAR}
+  </update>
+  <select resultMap="BaseResultMap" parameterType="com.nngdjt.test.entity.EsbTraceRecordsExample" id="selectByExampleWithRowbounds" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from esb_trace_records
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
